@@ -1,10 +1,12 @@
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+
 <div align=center>
 <img src="/doc/image/logo.png"/>
 </div>
 
 ## LibDriver INA219
 
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/ina219/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 INA219 是一款具備 I2C 或 SMBUS 兼容接口的分流器和功率監測計。該器件監測分流器電壓降和總線電源電壓，轉換次數和濾波選項可通過編程設定。可編程校準值與內部乘法器相結合，支持直接讀取電流值（單位：安培）。通過附加乘法寄存器可計算功率（單位：瓦）。 I2C 或 SMBUS 兼容接口 具有 16 個可編程地址。 INA219 可在 0V 至 26V 範圍內感測總線中的分壓。該器件由 3V 至 5.5V 單電源供電，電源的最大流耗為 1mA。該設備可用於服務器、通信設備、筆記本、電源管理、充電器、電焊、電源和測試設備等。
 
