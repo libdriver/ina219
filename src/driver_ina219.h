@@ -315,9 +315,10 @@ uint8_t ina219_init(ina219_handle_t *handle);
  * @param[in] *handle points to a ina219 handle structure
  * @return    status code
  *            - 0 success
- *            - 1 power down failed
+ *            - 1 iic deinit failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
+ *            - 4 power down failed
  * @note      none
  */
 uint8_t ina219_deinit(ina219_handle_t *handle);

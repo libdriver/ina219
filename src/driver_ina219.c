@@ -982,6 +982,12 @@ uint8_t ina219_init(ina219_handle_t *handle)
         
         return 3;                                                              /* return error */
     }
+    if (handle->iic_deinit == NULL)                                            /* check iic_deinit */
+    {
+        handle->debug_print("ina219: iic_deinit is null.\n");                  /* iic_deinit is null */
+        
+        return 3;                                                              /* return error */
+    }
     if (handle->iic_read == NULL)                                              /* check iic_read */
     {
         handle->debug_print("ina219: iic_read is null.\n");                    /* iic_read is null */
@@ -1047,9 +1053,10 @@ uint8_t ina219_init(ina219_handle_t *handle)
  * @param[in] *handle points to a ina219 handle structure
  * @return    status code
  *            - 0 success
- *            - 1 power down failed
+ *            - 1 iic deinit failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
+ *            - 4 power down failed
  * @note      none
  */
 uint8_t ina219_deinit(ina219_handle_t *handle)
@@ -1071,13 +1078,20 @@ uint8_t ina219_deinit(ina219_handle_t *handle)
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
-        return 1;                                                              /* return error */
+        return 4;                                                              /* return error */
     }
     prev &= ~(0x07);                                                           /* clear mode */
     res = _ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);         /* write config */
     if (res)                                                                   /* check result */
     {
         handle->debug_print("ina219: write conf register failed.\n");          /* write conf register failed */
+       
+        return 4;                                                              /* return error */
+    }
+    res = handle->iic_deinit();                                                /* iic deinit */
+    if (res)                                                                   /* check result */
+    {
+        handle->debug_print("ina219: iic deinit failed.\n");                   /* iic deinit failed */
        
         return 1;                                                              /* return error */
     }
