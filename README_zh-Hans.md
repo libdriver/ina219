@@ -1,4 +1,4 @@
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md) | [日本語](/README_ja.md) | [Deutsch](/README_de.md) | [한국어](/README_ko.md)
 
 <div align=center>
 <img src="/doc/image/logo.png"/>
@@ -6,11 +6,11 @@
 
 ## LibDriver INA219
 
-[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/ina219/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
+[![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/ina219/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 INA219 是一款具备 I2C 或 SMBUS 兼容接口的分流器和功率监测计。该器件监测分流器电压降和总线电源电压，转换次数和滤波选项可通过编程设定。可编程校准值与内部乘法器相结合，支持直接读取电流值（单位：安培）。通过附加乘法寄存器可计算功率（单位：瓦）。I2C 或 SMBUS 兼容接口 具有 16 个可编程地址。INA219 可在 0V 至 26V 范围内感测总线中的分压。该器件由 3V 至 5.5V 单电源供电，电源的最大流耗为 1mA。该设备可用于服务器、通信设备、笔记本、电源管理、充电器、电焊、电源和测试设备等。
 
-LibDriver INA219是LibDriver推出的INA219的全功能驱动，该驱动提供连续模式读取、单次模式读取，电流采集、电压采集和功率采集等功能。
+LibDriver INA219是LibDriver推出的INA219的全功能驱动，该驱动提供连续模式读取、单次模式读取，电流采集、电压采集和功率采集等功能并且它符合MISRA标准。
 
 ### 目录
 

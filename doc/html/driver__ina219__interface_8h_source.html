@@ -89,8 +89,8 @@ $(document).ready(function(){initNavTree('driver__ina219__interface_8h_source.ht
 </div><!--header-->
 <div class="contents">
 <a href="driver__ina219__interface_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#ifndef _DRIVER_INA219_INTERFACE_H_</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#define _DRIVER_INA219_INTERFACE_H_</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#ifndef DRIVER_INA219_INTERFACE_H</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#define DRIVER_INA219_INTERFACE_H</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="driver__ina219_8h.html">driver_ina219.h</a>&quot;</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
@@ -108,19 +108,19 @@ $(document).ready(function(){initNavTree('driver__ina219__interface_8h_source.ht
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__ina219__interface__driver.html#ga633e3559e78e959bf6e9fca3354c6241">ina219_interface_delay_ms</a>(uint32_t ms);</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;uint16_t <a class="code" href="group__ina219__interface__driver.html#ga60cdba8db325efbfe0bd5f9a011299b7">ina219_interface_debug_print</a>(<span class="keywordtype">char</span> *fmt, ...);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__ina219__interface__driver.html#gad3a806fbff0baa6c10be7da746a154a4">ina219_interface_debug_print</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *<span class="keyword">const</span> fmt, ...);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="adriver__ina219_8h_html"><div class="ttname"><a href="driver__ina219_8h.html">driver_ina219.h</a></div><div class="ttdoc">driver ina219 header file</div></div>
 <div class="ttc" id="agroup__ina219__interface__driver_html_ga03559b7fdbc5caff2f4f2e339f5a275d"><div class="ttname"><a href="group__ina219__interface__driver.html#ga03559b7fdbc5caff2f4f2e339f5a275d">ina219_interface_iic_init</a></div><div class="ttdeci">uint8_t ina219_interface_iic_init(void)</div><div class="ttdoc">interface iic bus init</div><div class="ttdef"><b>Definition:</b> <a href="driver__ina219__interface__template_8c_source.html#l00046">driver_ina219_interface_template.c:46</a></div></div>
 <div class="ttc" id="agroup__ina219__interface__driver_html_ga26fcca03b2b12f20dd3444ec358784dd"><div class="ttname"><a href="group__ina219__interface__driver.html#ga26fcca03b2b12f20dd3444ec358784dd">ina219_interface_iic_write</a></div><div class="ttdeci">uint8_t ina219_interface_iic_write(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len)</div><div class="ttdoc">interface iic bus write</div><div class="ttdef"><b>Definition:</b> <a href="driver__ina219__interface__template_8c_source.html#l00090">driver_ina219_interface_template.c:90</a></div></div>
 <div class="ttc" id="agroup__ina219__interface__driver_html_ga525b409d9256841bba469d73949b3f72"><div class="ttname"><a href="group__ina219__interface__driver.html#ga525b409d9256841bba469d73949b3f72">ina219_interface_iic_read</a></div><div class="ttdeci">uint8_t ina219_interface_iic_read(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len)</div><div class="ttdoc">interface iic bus read</div><div class="ttdef"><b>Definition:</b> <a href="driver__ina219__interface__template_8c_source.html#l00074">driver_ina219_interface_template.c:74</a></div></div>
-<div class="ttc" id="agroup__ina219__interface__driver_html_ga60cdba8db325efbfe0bd5f9a011299b7"><div class="ttname"><a href="group__ina219__interface__driver.html#ga60cdba8db325efbfe0bd5f9a011299b7">ina219_interface_debug_print</a></div><div class="ttdeci">uint16_t ina219_interface_debug_print(char *fmt,...)</div><div class="ttdoc">interface print format data</div><div class="ttdef"><b>Definition:</b> <a href="driver__ina219__interface__template_8c_source.html#l00111">driver_ina219_interface_template.c:111</a></div></div>
 <div class="ttc" id="agroup__ina219__interface__driver_html_ga633e3559e78e959bf6e9fca3354c6241"><div class="ttname"><a href="group__ina219__interface__driver.html#ga633e3559e78e959bf6e9fca3354c6241">ina219_interface_delay_ms</a></div><div class="ttdeci">void ina219_interface_delay_ms(uint32_t ms)</div><div class="ttdoc">interface delay ms</div><div class="ttdef"><b>Definition:</b> <a href="driver__ina219__interface__template_8c_source.html#l00100">driver_ina219_interface_template.c:100</a></div></div>
+<div class="ttc" id="agroup__ina219__interface__driver_html_gad3a806fbff0baa6c10be7da746a154a4"><div class="ttname"><a href="group__ina219__interface__driver.html#gad3a806fbff0baa6c10be7da746a154a4">ina219_interface_debug_print</a></div><div class="ttdeci">void ina219_interface_debug_print(const char *const fmt,...)</div><div class="ttdoc">interface print format data</div><div class="ttdef"><b>Definition:</b> <a href="driver__ina219__interface__template_8c_source.html#l00110">driver_ina219_interface_template.c:110</a></div></div>
 <div class="ttc" id="agroup__ina219__interface__driver_html_gaff576d82d931190512a41d7e5805a336"><div class="ttname"><a href="group__ina219__interface__driver.html#gaff576d82d931190512a41d7e5805a336">ina219_interface_iic_deinit</a></div><div class="ttdeci">uint8_t ina219_interface_iic_deinit(void)</div><div class="ttdoc">interface iic bus deinit</div><div class="ttdef"><b>Definition:</b> <a href="driver__ina219__interface__template_8c_source.html#l00058">driver_ina219_interface_template.c:58</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

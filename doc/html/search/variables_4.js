@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['r_230',['r',['../structina219__handle__s.html#a4788d82c901b9367dd5c0daff8a7616b',1,'ina219_handle_s']]]
+  ['r_230',['r',['../structina219__handle__s.html#a880a49112fedae68e714341a9a082fb6',1,'ina219_handle_s']]]
 ];

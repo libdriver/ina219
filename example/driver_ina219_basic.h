@@ -34,8 +34,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_INA219_BASIC_H_
-#define _DRIVER_INA219_BASIC_H_
+#ifndef DRIVER_INA219_BASIC_H
+#define DRIVER_INA219_BASIC_H
 
 #include "driver_ina219_interface.h"
 

@@ -50,9 +50,9 @@ static ina219_handle_t gs_handle;        /**< ina219 handle */
  */
 uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
 {
-    volatile uint8_t res;
-    volatile uint32_t i;
-    volatile uint16_t calibration;
+    uint8_t res;
+    uint32_t i;
+    uint16_t calibration;
     ina219_info_t info;
     
     /* link interface function */
@@ -66,7 +66,7 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
     
     /* get information */
     res = ina219_info(&info);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get info failed.\n");
        
@@ -91,7 +91,7 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
     
     /* set addr pin */
     res = ina219_set_addr_pin(&gs_handle, addr_pin);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -100,7 +100,7 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
 
     /* set the r */
     res = ina219_set_resistance(&gs_handle, r);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set resistance failed.\n");
        
@@ -109,7 +109,7 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
     
     /* init */
     res = ina219_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: init failed.\n");
        
@@ -118,40 +118,40 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
     
     /* set bus voltage range 32V */
     res = ina219_set_bus_voltage_range(&gs_handle, INA219_BUS_VOLTAGE_RANGE_32V);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage range failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set bus voltage adc mode 12 bit 1 sample */
     res = ina219_set_bus_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_1_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set shunt voltage adc mode 12 bit 1 sample */
     res = ina219_set_shunt_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_1_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set shunt bus voltage continuous */
     res = ina219_set_mode(&gs_handle, INA219_MODE_SHUNT_BUS_VOLTAGE_CONTINUOUS);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -160,41 +160,41 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
     
     /* set pga 40 mV */
     res = ina219_set_pga(&gs_handle, INA219_PGA_40_MV);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     res = ina219_calculate_calibration(&gs_handle, (uint16_t *)&calibration);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: calculate calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     res = ina219_set_calibration(&gs_handle, calibration);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     for (i = 0; i < times; i++)
     {
-        volatile int16_t s_raw;
-        volatile int16_t u_raw;
-        volatile float m;
+        int16_t s_raw;
+        uint16_t u_raw;
+        float m;
         
         /* read shunt voltage */
         res = ina219_read_shunt_voltage(&gs_handle, (int16_t *)&s_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read shunt voltage failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -202,10 +202,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read bus voltage */
         res = ina219_read_bus_voltage(&gs_handle, (uint16_t *)&u_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read bus voltage failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -213,10 +213,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read current */
         res = ina219_read_current(&gs_handle, (int16_t *)&s_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read current failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -224,10 +224,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read power */
         res = ina219_read_power(&gs_handle, (uint16_t *)&u_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read power failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -240,41 +240,41 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
     
     /* set pga 80 mV */
     res = ina219_set_pga(&gs_handle, INA219_PGA_80_MV);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     res = ina219_calculate_calibration(&gs_handle, (uint16_t *)&calibration);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: calculate calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     res = ina219_set_calibration(&gs_handle, calibration);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     for (i = 0; i < times; i++)
     {
-        volatile int16_t s_raw;
-        volatile int16_t u_raw;
-        volatile float m;
+        int16_t s_raw;
+        uint16_t u_raw;
+        float m;
         
         /* read shunt voltage */
         res = ina219_read_shunt_voltage(&gs_handle, (int16_t *)&s_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read shunt voltage failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -282,10 +282,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read bus voltage */
         res = ina219_read_bus_voltage(&gs_handle, (uint16_t *)&u_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read bus voltage failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -293,10 +293,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read current */
         res = ina219_read_current(&gs_handle, (int16_t *)&s_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read current failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -304,10 +304,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read power */
         res = ina219_read_power(&gs_handle, (uint16_t *)&u_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read power failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -320,41 +320,41 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
     
     /* set pga 160 mV */
     res = ina219_set_pga(&gs_handle, INA219_PGA_160_MV);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     res = ina219_calculate_calibration(&gs_handle, (uint16_t *)&calibration);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: calculate calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     res = ina219_set_calibration(&gs_handle, calibration);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     for (i = 0; i < times; i++)
     {
-        volatile int16_t s_raw;
-        volatile int16_t u_raw;
-        volatile float m;
+        int16_t s_raw;
+        uint16_t u_raw;
+        float m;
         
         /* read shunt voltage */
         res = ina219_read_shunt_voltage(&gs_handle, (int16_t *)&s_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read shunt voltage failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -362,10 +362,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read bus voltage */
         res = ina219_read_bus_voltage(&gs_handle, (uint16_t *)&u_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read bus voltage failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -373,10 +373,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read current */
         res = ina219_read_current(&gs_handle, (int16_t *)&s_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read current failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -384,10 +384,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read power */
         res = ina219_read_power(&gs_handle, (uint16_t *)&u_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read power failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -400,41 +400,41 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
     
     /* set pga 320 mV */
     res = ina219_set_pga(&gs_handle, INA219_PGA_320_MV);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     res = ina219_calculate_calibration(&gs_handle, (uint16_t *)&calibration);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: calculate calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     res = ina219_set_calibration(&gs_handle, calibration);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     for (i = 0; i < times; i++)
     {
-        volatile int16_t s_raw;
-        volatile int16_t u_raw;
-        volatile float m;
+        int16_t s_raw;
+        uint16_t u_raw;
+        float m;
         
         /* read shunt voltage */
         res = ina219_read_shunt_voltage(&gs_handle, (int16_t *)&s_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read shunt voltage failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -442,10 +442,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read bus voltage */
         res = ina219_read_bus_voltage(&gs_handle, (uint16_t *)&u_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read bus voltage failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -453,10 +453,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read current */
         res = ina219_read_current(&gs_handle, (int16_t *)&s_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read current failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -464,10 +464,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read power */
         res = ina219_read_power(&gs_handle, (uint16_t *)&u_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read power failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -480,26 +480,26 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
     
     for (i = 0; i < times; i++)
     {
-        volatile int16_t s_raw;
-        volatile int16_t u_raw;
-        volatile float m;
+        int16_t s_raw;
+        uint16_t u_raw;
+        float m;
         
         /* set shunt bus voltage triggered */
         res = ina219_set_mode(&gs_handle, INA219_MODE_SHUNT_BUS_VOLTAGE_TRIGGERED);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: set mode failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
         
         /* read shunt voltage */
         res = ina219_read_shunt_voltage(&gs_handle, (int16_t *)&s_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read shunt voltage failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -507,10 +507,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read bus voltage */
         res = ina219_read_bus_voltage(&gs_handle, (uint16_t *)&u_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read bus voltage failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -518,10 +518,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read current */
         res = ina219_read_current(&gs_handle, (int16_t *)&s_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read current failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -529,10 +529,10 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
         
         /* read power */
         res = ina219_read_power(&gs_handle, (uint16_t *)&u_raw, (float *)&m);
-        if (res)
+        if (res != 0)
         {
             ina219_interface_debug_print("ina219: read power failed.\n");
-            ina219_deinit(&gs_handle);
+            (void)ina219_deinit(&gs_handle);
             
             return 1;
         }
@@ -542,7 +542,7 @@ uint8_t ina219_read_test(ina219_address_t addr_pin, double r, uint32_t times)
     }
     
     /* finish read test */
-    ina219_deinit(&gs_handle);
+    (void)ina219_deinit(&gs_handle);
     ina219_interface_debug_print("ina219: finish read test.\n");
     
     return 0;

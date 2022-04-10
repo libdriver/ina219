@@ -34,8 +34,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_INA219_H_
-#define _DRIVER_INA219_H_
+#ifndef DRIVER_INA219_H
+#define DRIVER_INA219_H
 
 #include <stdio.h>
 #include <stdint.h>
@@ -143,8 +143,8 @@ typedef struct ina219_handle_s
     uint8_t (*iic_read)(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len);         /**< point to a iic_read function address */
     uint8_t (*iic_write)(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len);        /**< point to a iic_write function address */
     void (*delay_ms)(uint32_t ms);                                                      /**< point to a delay_ms function address */
-    uint16_t (*debug_print)(char *fmt, ...);                                            /**< point to a debug_print function address */
-    float r;                                                                            /**< resistance */
+    void (*debug_print)(const char *const fmt, ...);                                    /**< point to a debug_print function address */
+    double r;                                                                           /**< resistance */
     double current_lsb;                                                                 /**< current lsb */
     uint8_t inited;                                                                     /**< inited flag */
 } ina219_handle_t;

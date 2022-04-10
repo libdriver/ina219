@@ -38,7 +38,7 @@
 #include "driver_ina219_basic.h"
 #include "driver_ina219_read_test.h"
 #include "driver_ina219_register_test.h"
-#include "iic.h"
+#include <stdlib.h>
 
 /**
  * @brief     ina219 full function
@@ -189,7 +189,7 @@ uint8_t ina219(uint8_t argc, char **argv)
                     }
                     
                     res = ina219_register_test(addr_pin);
-                    if (res)
+                    if (res != 0)
                     {
                         return 1;
                     }
@@ -298,12 +298,12 @@ uint8_t ina219(uint8_t argc, char **argv)
                     if (strcmp("-r", argv[6]) == 0)
                     {
                         uint8_t res;
-                        float r;
+                        double r;
                         
                         r = atof(argv[7]);
                         
                         res = ina219_read_test(addr_pin, r, times);
-                        if (res)
+                        if (res != 0)
                         {
                             return 1;
                         }
@@ -410,11 +410,11 @@ uint8_t ina219(uint8_t argc, char **argv)
                     if (strcmp("-r", argv[6]) == 0)
                     {
                         uint8_t res;
-                        float r;
+                        double r;
                         
                         r = atof(argv[7]);
                         res = ina219_basic_init(addr_pin, r);
-                        if (res)
+                        if (res != 0)
                         {
                             return 1;
                         }
@@ -426,9 +426,9 @@ uint8_t ina219(uint8_t argc, char **argv)
                             float mW;
                             
                             res = ina219_basic_read(&mV, &mA, &mW);
-                            if (res)
+                            if (res != 0)
                             {
-                                ina219_basic_deinit();
+                                (void)ina219_basic_deinit();
                                 
                                 return 1;
                             }
@@ -440,7 +440,7 @@ uint8_t ina219(uint8_t argc, char **argv)
                             ina219_interface_delay_ms(1000);
                         }
                         
-                        ina219_basic_deinit();
+                        (void)ina219_basic_deinit();
                         
                         return 0;
                     }
@@ -534,11 +534,11 @@ uint8_t ina219(uint8_t argc, char **argv)
                     if (strcmp("-r", argv[6]) == 0)
                     {
                         uint8_t res;
-                        float r;
+                        double r;
                         
                         r = atof(argv[7]);
                         res = ina219_shot_init(addr_pin, r);
-                        if (res)
+                        if (res != 0)
                         {
                             return 1;
                         }
@@ -549,9 +549,9 @@ uint8_t ina219(uint8_t argc, char **argv)
                             float mW;
                             
                             res = ina219_shot_read(&mV, &mA, &mW);
-                            if (res)
+                            if (res != 0)
                             {
-                                ina219_shot_deinit();
+                                (void)ina219_shot_deinit();
                                 
                                 return 1;
                             }
@@ -563,7 +563,7 @@ uint8_t ina219(uint8_t argc, char **argv)
                             ina219_interface_delay_ms(1000);
                         }
                         
-                        ina219_shot_deinit();
+                        (void)ina219_shot_deinit();
                         
                         return 0;
                     }

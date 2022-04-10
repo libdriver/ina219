@@ -49,9 +49,9 @@ static ina219_handle_t gs_handle;        /**< ina219 handle */
  */
 uint8_t ina219_register_test(ina219_address_t addr_pin)
 {
-    volatile uint8_t res;
-    volatile double r, r_check;
-    volatile uint16_t data, data_check;
+    uint8_t res;
+    double r, r_check;
+    uint16_t data, data_check;
     ina219_info_t info;
     ina219_address_t addr;
     ina219_bus_voltage_range_t range;
@@ -70,7 +70,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* get information */
     res = ina219_info(&info);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get info failed.\n");
        
@@ -98,7 +98,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 0 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_0);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -106,7 +106,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 0.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -116,7 +116,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 1 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_1);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -124,7 +124,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 1.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -134,7 +134,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 2 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_2);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -142,7 +142,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 2.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -152,7 +152,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 3 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_3);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -160,7 +160,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 3.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -170,7 +170,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 4 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_4);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -178,7 +178,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 4.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -188,7 +188,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 5 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_5);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -196,7 +196,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 5.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -206,7 +206,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 6 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_6);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -214,7 +214,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 6.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -224,7 +224,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 7 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_7);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -232,7 +232,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 7.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -242,7 +242,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 8 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_8);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -250,7 +250,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 8.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -260,7 +260,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 9 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_9);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -268,7 +268,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 9.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -278,7 +278,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 10 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_A);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -286,7 +286,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 10.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -296,7 +296,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 11 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_B);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -304,7 +304,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 11.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -314,7 +314,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 12 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_C);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -322,7 +322,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 12.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -332,7 +332,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 13 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_D);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -340,7 +340,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 13.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -350,7 +350,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 14 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_E);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -358,7 +358,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 14.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -368,7 +368,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set address 15 */
     res = ina219_set_addr_pin(&gs_handle, INA219_ADDRESS_F);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -376,7 +376,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set addr pin 15.\n");
     res = ina219_get_addr_pin(&gs_handle, &addr);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get addr pin failed.\n");
        
@@ -390,7 +390,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     /* generate the r */
     r = (double)(rand() % 100) / 1000.0;
     res = ina219_set_resistance(&gs_handle, r);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set resistance failed.\n");
        
@@ -398,7 +398,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     }
     ina219_interface_debug_print("ina219: set resistance %f.\n", r);
     res = ina219_get_resistance(&gs_handle, (double *)&r_check);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get resistance failed.\n");
        
@@ -408,7 +408,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set addr pin */
     res = ina219_set_addr_pin(&gs_handle, addr_pin);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set addr pin failed.\n");
        
@@ -417,7 +417,7 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* init */
     res = ina219_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: init failed.\n");
        
@@ -429,19 +429,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set bus voltage range 16V */
     res = ina219_set_bus_voltage_range(&gs_handle, INA219_BUS_VOLTAGE_RANGE_16V);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage range failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage range 16V.\n");
     res = ina219_get_bus_voltage_range(&gs_handle, &range);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage range failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -449,19 +449,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set bus voltage range 32V */
     res = ina219_set_bus_voltage_range(&gs_handle, INA219_BUS_VOLTAGE_RANGE_32V);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage range failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage range 32V.\n");
     res = ina219_get_bus_voltage_range(&gs_handle, &range);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage range failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -472,19 +472,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set 40 mV */
     res = ina219_set_pga(&gs_handle, INA219_PGA_40_MV);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set pga 40 mV.\n");
     res = ina219_get_pga(&gs_handle, &pga);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -492,19 +492,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set 80 mV */
     res = ina219_set_pga(&gs_handle, INA219_PGA_80_MV);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set pga 80 mV.\n");
     res = ina219_get_pga(&gs_handle, &pga);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -512,19 +512,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set 160 mV */
     res = ina219_set_pga(&gs_handle, INA219_PGA_160_MV);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set pga 160 mV.\n");
     res = ina219_get_pga(&gs_handle, &pga);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -532,19 +532,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set 320 mV */
     res = ina219_set_pga(&gs_handle, INA219_PGA_320_MV);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set pga 320 mV.\n");
     res = ina219_get_pga(&gs_handle, &pga);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -555,19 +555,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 9 bit 1 sample */
     res = ina219_set_bus_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_9_BIT_1_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage adc mode 9 bit 1 sample.\n");
     res = ina219_get_bus_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -575,19 +575,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 10 bit 1 sample */
     res = ina219_set_bus_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_10_BIT_1_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage adc mode 10 bit 1 sample.\n");
     res = ina219_get_bus_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -595,19 +595,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 11 bit 1 sample */
     res = ina219_set_bus_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_11_BIT_1_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage adc mode 11 bit 1 sample.\n");
     res = ina219_get_bus_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -615,19 +615,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 1 sample */
     res = ina219_set_bus_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_1_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage adc mode 12 bit 1 sample.\n");
     res = ina219_get_bus_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -635,19 +635,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 2 sample */
     res = ina219_set_bus_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_2_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage adc mode 12 bit 2 sample.\n");
     res = ina219_get_bus_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -655,19 +655,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 4 sample */
     res = ina219_set_bus_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_4_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage adc mode 12 bit 4 sample.\n");
     res = ina219_get_bus_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -675,19 +675,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 8 sample */
     res = ina219_set_bus_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_8_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage adc mode 12 bit 8 sample.\n");
     res = ina219_get_bus_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -695,19 +695,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 16 sample */
     res = ina219_set_bus_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_16_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage adc mode 12 bit 16 sample.\n");
     res = ina219_get_bus_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -715,19 +715,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 32 sample */
     res = ina219_set_bus_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_32_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage adc mode 12 bit 32 sample.\n");
     res = ina219_get_bus_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -735,19 +735,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 64 sample */
     res = ina219_set_bus_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_64_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage adc mode 12 bit 64 sample.\n");
     res = ina219_get_bus_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -755,19 +755,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 128 sample */
     res = ina219_set_bus_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_128_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage adc mode 12 bit 128 sample.\n");
     res = ina219_get_bus_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get bus voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -778,19 +778,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 9 bit 1 sample */
     res = ina219_set_shunt_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_9_BIT_1_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage adc mode 9 bit 1 sample.\n");
     res = ina219_get_shunt_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -798,19 +798,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 10 bit 1 sample */
     res = ina219_set_shunt_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_10_BIT_1_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage adc mode 10 bit 1 sample.\n");
     res = ina219_get_shunt_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -818,19 +818,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 11 bit 1 sample */
     res = ina219_set_shunt_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_11_BIT_1_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage adc mode 11 bit 1 sample.\n");
     res = ina219_get_shunt_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -838,19 +838,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 1 sample */
     res = ina219_set_shunt_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_1_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage adc mode 12 bit 1 sample.\n");
     res = ina219_get_shunt_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -858,19 +858,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 2 sample */
     res = ina219_set_shunt_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_2_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage adc mode 12 bit 2 sample.\n");
     res = ina219_get_shunt_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -878,19 +878,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 4 sample */
     res = ina219_set_shunt_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_4_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage adc mode 12 bit 4 sample.\n");
     res = ina219_get_shunt_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -898,19 +898,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 8 sample */
     res = ina219_set_shunt_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_8_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage adc mode 12 bit 8 sample.\n");
     res = ina219_get_shunt_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -918,19 +918,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
 
     /* 12 bit 16 sample */
     res = ina219_set_shunt_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_16_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage adc mode 12 bit 16 sample.\n");
     res = ina219_get_shunt_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -938,19 +938,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 32 sample */
     res = ina219_set_shunt_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_32_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage adc mode 12 bit 32 sample.\n");
     res = ina219_get_shunt_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -958,19 +958,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* 12 bit 64 sample */
     res = ina219_set_shunt_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_64_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage adc mode 12 bit 64 sample.\n");
     res = ina219_get_shunt_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -978,19 +978,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
 
     /* 12 bit 128 sample */
     res = ina219_set_shunt_voltage_adc_mode(&gs_handle, INA219_ADC_MODE_12_BIT_128_SAMPLES);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage adc mode 12 bit 128 sample.\n");
     res = ina219_get_shunt_voltage_adc_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get shunt voltage adc mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1001,19 +1001,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set power down */
     res = ina219_set_mode(&gs_handle, INA219_MODE_POWER_DOWN);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set power down mode.\n");
     res = ina219_get_mode(&gs_handle, &chip_mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1021,19 +1021,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set adc off */
     res = ina219_set_mode(&gs_handle, INA219_MODE_ADC_OFF);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set adc off mode.\n");
     res = ina219_get_mode(&gs_handle, &chip_mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1041,19 +1041,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set shunt voltage continuous */
     res = ina219_set_mode(&gs_handle, INA219_MODE_SHUNT_VOLTAGE_CONTINUOUS);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage continuous mode.\n");
     res = ina219_get_mode(&gs_handle, &chip_mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1061,19 +1061,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set bus voltage continuous */
     res = ina219_set_mode(&gs_handle, INA219_MODE_BUS_VOLTAGE_CONTINUOUS);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage continuous mode.\n");
     res = ina219_get_mode(&gs_handle, &chip_mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1081,19 +1081,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set shunt bus voltage continuous */
     res = ina219_set_mode(&gs_handle, INA219_MODE_SHUNT_BUS_VOLTAGE_CONTINUOUS);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt bus voltage continuous mode.\n");
     res = ina219_get_mode(&gs_handle, &chip_mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1101,19 +1101,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set shunt voltage triggered */
     res = ina219_set_mode(&gs_handle, INA219_MODE_SHUNT_VOLTAGE_TRIGGERED);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt voltage triggered mode.\n");
     res = ina219_get_mode(&gs_handle, &chip_mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1121,19 +1121,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set bus voltage triggered */
     res = ina219_set_mode(&gs_handle, INA219_MODE_BUS_VOLTAGE_TRIGGERED);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set bus voltage triggered mode.\n");
     res = ina219_get_mode(&gs_handle, &chip_mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1141,19 +1141,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set shunt bus voltage triggered */
     res = ina219_set_mode(&gs_handle, INA219_MODE_SHUNT_BUS_VOLTAGE_TRIGGERED);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set shunt bus voltage triggered mode.\n");
     res = ina219_get_mode(&gs_handle, &chip_mode);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get mode failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1164,19 +1164,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set pga 40 mV */
     res = ina219_set_pga(&gs_handle, INA219_PGA_40_MV);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set pga 40 mV.\n");
     res = ina219_calculate_calibration(&gs_handle, (uint16_t *)&data_check);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: calculate calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1184,19 +1184,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
 
     /* set pga 80 mV */
     res = ina219_set_pga(&gs_handle, INA219_PGA_80_MV);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set pga 80 mV.\n");
     res = ina219_calculate_calibration(&gs_handle, (uint16_t *)&data_check);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: calculate calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1204,19 +1204,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     /* set pga 160 mV */
     res = ina219_set_pga(&gs_handle, INA219_PGA_160_MV);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set pga 160 mV.\n");
     res = ina219_calculate_calibration(&gs_handle, (uint16_t *)&data_check);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: calculate calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1224,19 +1224,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
 
     /* set pga 320 mV */
     res = ina219_set_pga(&gs_handle, INA219_PGA_320_MV);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set pga failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set pga 320 mV.\n");
     res = ina219_calculate_calibration(&gs_handle, (uint16_t *)&data_check);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: calculate calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1247,19 +1247,19 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     
     data = rand() % 65536;
     res = ina219_set_calibration(&gs_handle, data);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: set calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     ina219_interface_debug_print("ina219: set calibration %d.\n", data);
     res = ina219_get_calibration(&gs_handle, (uint16_t *)&data_check);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: get calibration failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
@@ -1269,16 +1269,16 @@ uint8_t ina219_register_test(ina219_address_t addr_pin)
     ina219_interface_debug_print("ina219: ina219_soft_reset test.\n");
     
     res = ina219_soft_reset(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         ina219_interface_debug_print("ina219: soft reset failed.\n");
-        ina219_deinit(&gs_handle);
+        (void)ina219_deinit(&gs_handle);
         
         return 1;
     }
     
     /* finish register test */
-    ina219_deinit(&gs_handle);
+    (void)ina219_deinit(&gs_handle);
     ina219_interface_debug_print("ina219: finish register test.\n");
     
     return 0;

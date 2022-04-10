@@ -199,7 +199,7 @@ uint8_t ina219(uint8_t argc, char **argv)
                     }
                     
                     res = ina219_register_test(addr_pin);
-                    if (res)
+                    if (res != 0)
                     {
                         return 1;
                     }
@@ -313,7 +313,7 @@ uint8_t ina219(uint8_t argc, char **argv)
                         r = atof(argv[7]);
                         
                         res = ina219_read_test(addr_pin, r, times);
-                        if (res)
+                        if (res != 0)
                         {
                             return 1;
                         }
@@ -424,7 +424,7 @@ uint8_t ina219(uint8_t argc, char **argv)
                         
                         r = atof(argv[7]);
                         res = ina219_basic_init(addr_pin, r);
-                        if (res)
+                        if (res != 0)
                         {
                             return 1;
                         }
@@ -436,9 +436,9 @@ uint8_t ina219(uint8_t argc, char **argv)
                             float mW;
                             
                             res = ina219_basic_read(&mV, &mA, &mW);
-                            if (res)
+                            if (res != 0)
                             {
-                                ina219_basic_deinit();
+                                (void)ina219_basic_deinit();
                                 
                                 return 1;
                             }
@@ -450,7 +450,7 @@ uint8_t ina219(uint8_t argc, char **argv)
                             ina219_interface_delay_ms(1000);
                         }
                         
-                        ina219_basic_deinit();
+                        (void)ina219_basic_deinit();
                         
                         return 0;
                     }
@@ -548,7 +548,7 @@ uint8_t ina219(uint8_t argc, char **argv)
                         
                         r = atof(argv[7]);
                         res = ina219_shot_init(addr_pin, r);
-                        if (res)
+                        if (res != 0)
                         {
                             return 1;
                         }
@@ -559,9 +559,9 @@ uint8_t ina219(uint8_t argc, char **argv)
                             float mW;
                             
                             res = ina219_shot_read(&mV, &mA, &mW);
-                            if (res)
+                            if (res != 0)
                             {
-                                ina219_shot_deinit();
+                                (void)ina219_shot_deinit();
                                 
                                 return 1;
                             }
@@ -573,7 +573,7 @@ uint8_t ina219(uint8_t argc, char **argv)
                             ina219_interface_delay_ms(1000);
                         }
                         
-                        ina219_shot_deinit();
+                        (void)ina219_shot_deinit();
                         
                         return 0;
                     }
@@ -611,7 +611,7 @@ uint8_t ina219(uint8_t argc, char **argv)
  */
 int main(void)
 {
-    volatile uint8_t res;
+    uint8_t res;
     
     /* stm32f407 clock init and hal init */
     clock_init();

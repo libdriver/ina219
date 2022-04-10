@@ -69,19 +69,20 @@
  *             - 1 read failed
  * @note       none
  */
-static uint8_t _ina219_iic_read(ina219_handle_t *handle, uint8_t reg, uint16_t *data)
+static uint8_t a_ina219_iic_read(ina219_handle_t *handle, uint8_t reg, uint16_t *data)
 {
-    volatile uint8_t buf[2];
+    uint8_t buf[2];
     
-    if (handle->iic_read(handle->iic_addr, reg, (uint8_t *)buf, 2))        /* read data */
+    memset(buf, 0, sizeof(uint8_t) * 2);                                        /* clear the buffer */
+    if (handle->iic_read(handle->iic_addr, reg, (uint8_t *)buf, 2) != 0)        /* read data */
     {
-        return 1;                                                          /* return error */
+        return 1;                                                               /* return error */
     }
     else
     {
-        *data = (uint16_t)buf[0] << 8 | buf[1];                            /* get data */
+        *data = (uint16_t)buf[0] << 8 | buf[1];                                 /* get data */
         
-        return 0;                                                          /* success return 0 */
+        return 0;                                                               /* success return 0 */
     }
 }
 
@@ -95,19 +96,19 @@ static uint8_t _ina219_iic_read(ina219_handle_t *handle, uint8_t reg, uint16_t *
  *            - 1 write failed
  * @note      none
  */
-static uint8_t _ina219_iic_write(ina219_handle_t *handle, uint8_t reg, uint16_t data)
+static uint8_t a_ina219_iic_write(ina219_handle_t *handle, uint8_t reg, uint16_t data)
 {
-    volatile uint8_t buf[2];
+    uint8_t buf[2];
     
-    buf[0] = (data >> 8) & 0xFF;                                            /* get MSB */
-    buf[1] = (data >> 0) & 0xFF;                                            /* get LSB */
-    if (handle->iic_write(handle->iic_addr, reg, (uint8_t *)buf, 2))        /* write data */
+    buf[0] = (uint8_t)((data >> 8) & 0xFF);                                      /* get MSB */
+    buf[1] = (uint8_t)((data >> 0) & 0xFF);                                      /* get LSB */
+    if (handle->iic_write(handle->iic_addr, reg, (uint8_t *)buf, 2) != 0)        /* write data */
     {
-        return 1;                                                           /* return error */
+        return 1;                                                                /* return error */
     }
     else
     {
-        return 0;                                                           /* success return 0 */
+        return 0;                                                                /* success return 0 */
     }
 }
 
@@ -164,14 +165,14 @@ uint8_t ina219_get_resistance(ina219_handle_t *handle, double *resistance)
  */
 uint8_t ina219_set_addr_pin(ina219_handle_t *handle, ina219_address_t addr_pin)
 {
-    if (handle == NULL)                 /* check handle */
+    if (handle == NULL)                          /* check handle */
     {
-        return 2;                       /* return error */
+        return 2;                                /* return error */
     }
     
-    handle->iic_addr = addr_pin;        /* set pin */
+    handle->iic_addr = (uint8_t)addr_pin;        /* set pin */
     
-    return 0;                           /* success return 0 */
+    return 0;                                    /* success return 0 */
 }
 
 /**
@@ -207,8 +208,8 @@ uint8_t ina219_get_addr_pin(ina219_handle_t *handle, ina219_address_t *addr_pin)
  */
 uint8_t ina219_soft_reset(ina219_handle_t *handle)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -219,8 +220,8 @@ uint8_t ina219_soft_reset(ina219_handle_t *handle)
         return 3;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
@@ -229,7 +230,7 @@ uint8_t ina219_soft_reset(ina219_handle_t *handle)
     prev &= ~(1 << 15);                                                        /* clear soft reset */
     prev |= 1 << 15;                                                           /* set soft reset */
 
-    return _ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);        /* write config */
+    return a_ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);       /* write config */
 }
 
 /**
@@ -245,8 +246,8 @@ uint8_t ina219_soft_reset(ina219_handle_t *handle)
  */
 uint8_t ina219_set_bus_voltage_range(ina219_handle_t *handle, ina219_bus_voltage_range_t range)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -257,8 +258,8 @@ uint8_t ina219_set_bus_voltage_range(ina219_handle_t *handle, ina219_bus_voltage
         return 3;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
@@ -267,7 +268,7 @@ uint8_t ina219_set_bus_voltage_range(ina219_handle_t *handle, ina219_bus_voltage
     prev &= ~(1 << 13);                                                        /* clear range bit */
     prev |= range << 13;                                                       /* set range bit */
 
-    return _ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);        /* write config */
+    return a_ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);       /* write config */
 }
 
 /**
@@ -283,8 +284,8 @@ uint8_t ina219_set_bus_voltage_range(ina219_handle_t *handle, ina219_bus_voltage
  */
 uint8_t ina219_get_bus_voltage_range(ina219_handle_t *handle, ina219_bus_voltage_range_t *range)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -295,8 +296,8 @@ uint8_t ina219_get_bus_voltage_range(ina219_handle_t *handle, ina219_bus_voltage
         return 3;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
@@ -320,8 +321,8 @@ uint8_t ina219_get_bus_voltage_range(ina219_handle_t *handle, ina219_bus_voltage
  */
 uint8_t ina219_set_pga(ina219_handle_t *handle, ina219_pga_t pga)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -332,8 +333,8 @@ uint8_t ina219_set_pga(ina219_handle_t *handle, ina219_pga_t pga)
         return 3;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
@@ -342,7 +343,7 @@ uint8_t ina219_set_pga(ina219_handle_t *handle, ina219_pga_t pga)
     prev &= ~(3 << 11);                                                        /* clear pga bit */
     prev |= pga << 11;                                                         /* set pga bit */
 
-    return _ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);        /* write config */
+    return a_ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);       /* write config */
 }
 
 /**
@@ -358,8 +359,8 @@ uint8_t ina219_set_pga(ina219_handle_t *handle, ina219_pga_t pga)
  */
 uint8_t ina219_get_pga(ina219_handle_t *handle, ina219_pga_t *pga)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -370,8 +371,8 @@ uint8_t ina219_get_pga(ina219_handle_t *handle, ina219_pga_t *pga)
         return 3;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
@@ -395,8 +396,8 @@ uint8_t ina219_get_pga(ina219_handle_t *handle, ina219_pga_t *pga)
  */
 uint8_t ina219_set_bus_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mode_t mode)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -407,8 +408,8 @@ uint8_t ina219_set_bus_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mode
         return 3;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
@@ -417,7 +418,7 @@ uint8_t ina219_set_bus_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mode
     prev &= ~(0xF << 7);                                                       /* clear mode bit */
     prev |= mode << 7;                                                         /* set mode bit */
 
-    return _ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);        /* write config */
+    return a_ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);       /* write config */
 }
 
 /**
@@ -433,8 +434,8 @@ uint8_t ina219_set_bus_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mode
  */
 uint8_t ina219_get_bus_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mode_t *mode)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -445,8 +446,8 @@ uint8_t ina219_get_bus_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mode
         return 3;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
@@ -470,8 +471,8 @@ uint8_t ina219_get_bus_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mode
  */
 uint8_t ina219_set_shunt_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mode_t mode)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -482,8 +483,8 @@ uint8_t ina219_set_shunt_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mo
         return 3;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
@@ -492,7 +493,7 @@ uint8_t ina219_set_shunt_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mo
     prev &= ~(0xF << 3);                                                       /* clear mode bit */
     prev |= mode << 3;                                                         /* set mode bit */
 
-    return _ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);        /* write config */
+    return a_ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);       /* write config */
 }
 
 /**
@@ -508,8 +509,8 @@ uint8_t ina219_set_shunt_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mo
  */
 uint8_t ina219_get_shunt_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mode_t *mode)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -520,8 +521,8 @@ uint8_t ina219_get_shunt_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mo
         return 3;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
@@ -545,8 +546,8 @@ uint8_t ina219_get_shunt_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mo
  */
 uint8_t ina219_set_mode(ina219_handle_t *handle, ina219_mode_t mode)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -557,8 +558,8 @@ uint8_t ina219_set_mode(ina219_handle_t *handle, ina219_mode_t mode)
         return 3;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
@@ -566,8 +567,8 @@ uint8_t ina219_set_mode(ina219_handle_t *handle, ina219_mode_t mode)
     }
     prev &= ~(0x7 << 0);                                                       /* clear mode bit */
     prev |= mode << 0;                                                         /* set mode bit */
-    res = _ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);         /* write config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);        /* write config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: write conf register failed.\n");          /* write conf register failed */
        
@@ -576,19 +577,19 @@ uint8_t ina219_set_mode(ina219_handle_t *handle, ina219_mode_t mode)
     if ((mode >= INA219_MODE_SHUNT_VOLTAGE_TRIGGERED) &&                       /* check mode */
         (mode <= INA219_MODE_SHUNT_BUS_VOLTAGE_TRIGGERED))
     {
-        volatile uint8_t mode, mode1, mode2, time;
+        uint8_t m, mode1, mode2, t;
         
         mode1 = (prev >> 3) & 0xF;                                             /* get shunt adc mode */
         mode2 = (prev >> 7) & 0xF;                                             /* get bus adc mode */
-        mode = (mode1 > mode2) ? mode1 : mode2;                                /* get max mode */
-        if (mode <= 8)                                                         /* check mode */
+        m = (mode1 > mode2) ? mode1 : mode2;                                   /* get max mode */
+        if (m <= 8)                                                            /* check mode */
         {
             handle->delay_ms(1);                                               /* delay 1 ms */
         }
         else
         {
-            time = (uint8_t)(0.532 * pow(2, mode - 8)) + 1;                    /* get time */
-            handle->delay_ms(time);                                            /* delay time */
+            t = (uint8_t)(0.532 * pow(2, m - 8)) + 1;                          /* get time */
+            handle->delay_ms(t);                                               /* delay time */
         }
         
         return 0;                                                              /* success return 0 */
@@ -612,8 +613,8 @@ uint8_t ina219_set_mode(ina219_handle_t *handle, ina219_mode_t mode)
  */
 uint8_t ina219_get_mode(ina219_handle_t *handle, ina219_mode_t *mode)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -624,8 +625,8 @@ uint8_t ina219_get_mode(ina219_handle_t *handle, ina219_mode_t *mode)
         return 3;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
@@ -650,8 +651,13 @@ uint8_t ina219_get_mode(ina219_handle_t *handle, ina219_mode_t *mode)
  */
 uint8_t ina219_read_shunt_voltage(ina219_handle_t *handle, int16_t *raw, float *mV)
 {
-    volatile uint8_t res;
-   
+    uint8_t res;
+    union
+    {
+        uint16_t u;
+        int16_t s;
+    } u;
+    
     if (handle == NULL)                                                               /* check handle */
     {
         return 2;                                                                     /* return error */
@@ -661,13 +667,14 @@ uint8_t ina219_read_shunt_voltage(ina219_handle_t *handle, int16_t *raw, float *
         return 3;                                                                     /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_SHUNT_VOLTAGE, (uint16_t *)raw);        /* read shunt voltage */
-    if (res)                                                                          /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_SHUNT_VOLTAGE, (uint16_t *)&u.u);      /* read shunt voltage */
+    if (res != 0)                                                                     /* check result */
     {
         handle->debug_print("ina219: read shunt voltage register failed.\n");         /* read shunt voltage register failed */
        
         return 1;                                                                     /* return error */
     }
+    *raw = u.s;                                                                       /* set the raw */
     *mV = (float)(*raw) / 100.0f;                                                     /* set the converted data */
     
     return 0;                                                                         /* success return 0 */
@@ -689,7 +696,7 @@ uint8_t ina219_read_shunt_voltage(ina219_handle_t *handle, int16_t *raw, float *
  */
 uint8_t ina219_read_bus_voltage(ina219_handle_t *handle, uint16_t *raw, float *mV)
 {
-    volatile uint8_t res;
+    uint8_t res;
    
     if (handle == NULL)                                                             /* check handle */
     {
@@ -700,20 +707,20 @@ uint8_t ina219_read_bus_voltage(ina219_handle_t *handle, uint16_t *raw, float *m
         return 3;                                                                   /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_BUS_VOLTAGE, (uint16_t *)raw);        /* read bus voltage */
-    if (res)                                                                        /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_BUS_VOLTAGE, (uint16_t *)raw);       /* read bus voltage */
+    if (res != 0)                                                                   /* check result */
     {
         handle->debug_print("ina219: read bus voltage register failed.\n");         /* read bus voltage register failed */
        
         return 1;                                                                   /* return error */
     }
-    if ((*raw) & (1 << 0))
+    if (((*raw) & (1 << 0)) != 0)
     {
         handle->debug_print("ina219: math overflow.\n");                            /* math overflow */
        
         return 4;                                                                   /* return error */
     }
-    if (!(*raw) & (1 << 1))
+    if (((*raw) & (1 << 1)) == 0)
     {
         handle->debug_print("ina219: conversion not ready.\n");                     /* math overflow */
        
@@ -739,7 +746,12 @@ uint8_t ina219_read_bus_voltage(ina219_handle_t *handle, uint16_t *raw, float *m
  */
 uint8_t ina219_read_current(ina219_handle_t *handle, int16_t *raw, float *mA)
 {
-    volatile uint8_t res;
+    uint8_t res;
+    union
+    {
+        uint16_t u;
+        int16_t s;
+    } u;
    
     if (handle == NULL)                                                         /* check handle */
     {
@@ -750,13 +762,14 @@ uint8_t ina219_read_current(ina219_handle_t *handle, int16_t *raw, float *mA)
         return 3;                                                               /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CURRENT, (uint16_t *)raw);        /* read current */
-    if (res)                                                                    /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CURRENT, (uint16_t *)&u.u);      /* read current */
+    if (res != 0)                                                               /* check result */
     {
         handle->debug_print("ina219: read current register failed.\n");         /* read current register failed */
        
         return 1;                                                               /* return error */
     }
+    *raw = u.s;                                                                 /* set the raw */
     *mA = (float)((double)(*raw) * handle->current_lsb * 1000);                 /* set the converted data */
     
     return 0;                                                                   /* success return 0 */
@@ -776,7 +789,7 @@ uint8_t ina219_read_current(ina219_handle_t *handle, int16_t *raw, float *mA)
  */
 uint8_t ina219_read_power(ina219_handle_t *handle, uint16_t *raw, float *mW)
 {
-    volatile uint8_t res;
+    uint8_t res;
    
     if (handle == NULL)                                                         /* check handle */
     {
@@ -787,8 +800,8 @@ uint8_t ina219_read_power(ina219_handle_t *handle, uint16_t *raw, float *mW)
         return 3;                                                               /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_POWER, (uint16_t *)raw);          /* read power */
-    if (res)                                                                    /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_POWER, (uint16_t *)raw);         /* read power */
+    if (res != 0)                                                               /* check result */
     {
         handle->debug_print("ina219: read power register failed.\n");           /* read power register failed */
        
@@ -812,7 +825,7 @@ uint8_t ina219_read_power(ina219_handle_t *handle, uint16_t *raw, float *mW)
  */
 uint8_t ina219_get_calibration(ina219_handle_t *handle, uint16_t *data)
 {
-    volatile uint8_t res;
+    uint8_t res;
    
     if (handle == NULL)                                                              /* check handle */
     {
@@ -823,8 +836,8 @@ uint8_t ina219_get_calibration(ina219_handle_t *handle, uint16_t *data)
         return 3;                                                                    /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CALIBRATION, (uint16_t *)data);        /* read calibration */
-    if (res)                                                                         /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CALIBRATION, (uint16_t *)data);       /* read calibration */
+    if (res != 0)                                                                    /* check result */
     {
         handle->debug_print("ina219: read calibration register failed.\n");          /* read calibration register failed */
        
@@ -850,10 +863,10 @@ uint8_t ina219_get_calibration(ina219_handle_t *handle, uint16_t *data)
  */
 uint8_t ina219_calculate_calibration(ina219_handle_t *handle, uint16_t *calibration)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
-    volatile uint8_t pga;
-    volatile double v;
+    uint8_t res;
+    uint16_t prev;
+    uint8_t pga;
+    double v;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -863,15 +876,15 @@ uint8_t ina219_calculate_calibration(ina219_handle_t *handle, uint16_t *calibrat
     {
         return 3;                                                              /* return error */
     }
-    if (handle->r == 0)
+    if ((handle->r >= -0.000001f)  && (handle->r <= 0.000001f))                /* check the r */
     {
         handle->debug_print("ina219: r can't be zero.\n");                     /* r can't be zero */
        
         return 4;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read conf */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read conf */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
@@ -883,38 +896,52 @@ uint8_t ina219_calculate_calibration(ina219_handle_t *handle, uint16_t *calibrat
         case 0 :
         {
             v = 0.04;                                                          /* 0.04 V */
+            res = 0;                                                           /* set ok */
             
             break;
         }
         case 1 :
         {
             v = 0.08;                                                          /* 0.08 V */
+            res = 0;                                                           /* set ok */
             
             break;
         }
         case 2 :
         {
             v = 0.16;                                                          /* 0.16 V */
+            res = 0;                                                           /* set ok */
             
             break;
         }
         case 3 :
         {
             v = 0.32;                                                          /* 0.32 V */
+            res = 0;                                                           /* set ok */
             
             break;
         }
         default :
         {
-            handle->debug_print("ina219: pga is invalid.\n");                  /* pga is invalid*/
-           
-            return 5;                                                          /* return error */
+            v = 0.0;                                                           /* 0.0 V */
+            res = 1;                                                           /* set failed */
+            
+            break;
         }
     }
-    handle->current_lsb = v / handle->r / pow(2.0, 15.0);                      /* current lsb */
-    *calibration = (uint16_t)(0.04096 / (v / pow(2.0, 15.0)));                 /* set calibration */
-    
-    return 0;                                                                  /* success return 0 */
+    if (res == 1)
+    {
+        handle->debug_print("ina219: pga is invalid.\n");                      /* pga is invalid*/
+        
+        return 5;                                                              /* return error */
+    }
+    else
+    {
+        handle->current_lsb = v / handle->r / pow(2.0, 15.0);                  /* current lsb */
+        *calibration = (uint16_t)(0.04096 / (v / pow(2.0, 15.0)));             /* set calibration */
+        
+        return 0;                                                              /* success return 0 */
+    }
 }
 
 /**
@@ -930,7 +957,7 @@ uint8_t ina219_calculate_calibration(ina219_handle_t *handle, uint16_t *calibrat
  */
 uint8_t ina219_set_calibration(ina219_handle_t *handle, uint16_t data)
 {
-    volatile uint8_t res;
+    uint8_t res;
    
     if (handle == NULL)                                                             /* check handle */
     {
@@ -941,8 +968,8 @@ uint8_t ina219_set_calibration(ina219_handle_t *handle, uint16_t data)
         return 3;                                                                   /* return error */
     }
     
-    res = _ina219_iic_write(handle, INA219_REG_CALIBRATION, data << 1);             /* write calibration */
-    if (res)                                                                        /* check result */
+    res = a_ina219_iic_write(handle, INA219_REG_CALIBRATION, data << 1);            /* write calibration */
+    if (res != 0)                                                                   /* check result */
     {
         handle->debug_print("ina219: write calibration register failed.\n");        /* write calibration register failed */
        
@@ -965,8 +992,8 @@ uint8_t ina219_set_calibration(ina219_handle_t *handle, uint16_t data)
  */
 uint8_t ina219_init(ina219_handle_t *handle)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
     
     if (handle == NULL)                                                        /* check handle */
     {
@@ -1007,36 +1034,36 @@ uint8_t ina219_init(ina219_handle_t *handle)
         return 3;                                                              /* return error */
     }
     
-    if (handle->iic_init())                                                    /* iic init */
+    if (handle->iic_init() != 0)                                               /* iic init */
     {
         handle->debug_print("ina219: iic init failed.\n");                     /* iic init failed */
         
         return 1;                                                              /* return error */
     }
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read conf */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read conf */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
         return 4;                                                              /* return error */
     }
     prev |= 1 << 15;
-    res = _ina219_iic_write(handle, INA219_REG_CONF, prev);                    /* write conf */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_write(handle, INA219_REG_CONF, prev);                   /* write conf */
+    if (res != 0)                                                              /* check result */
     {
-        handle->debug_print("ina219: write conf register failed.\n");           /* write conf register failed */
+        handle->debug_print("ina219: write conf register failed.\n");          /* write conf register failed */
        
         return 4;                                                              /* return error */
     }
     handle->delay_ms(10);                                                      /* delay 10 ms */
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read conf */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read conf */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
         return 4;                                                              /* return error */
     }
-    if (prev & (1 << 15))
+    if ((prev & (1 << 15)) != 0)                                               /* check the result */
     {
         handle->debug_print("ina219: soft reset failed.\n");                   /* soft reset failed */
        
@@ -1061,8 +1088,8 @@ uint8_t ina219_init(ina219_handle_t *handle)
  */
 uint8_t ina219_deinit(ina219_handle_t *handle)
 {
-    volatile uint8_t res;
-    volatile uint16_t prev;
+    uint8_t res;
+    uint16_t prev;
    
     if (handle == NULL)                                                        /* check handle */
     {
@@ -1073,23 +1100,23 @@ uint8_t ina219_deinit(ina219_handle_t *handle)
         return 3;                                                              /* return error */
     }
     
-    res = _ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);        /* read config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_read(handle, INA219_REG_CONF, (uint16_t *)&prev);       /* read config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
        
         return 4;                                                              /* return error */
     }
     prev &= ~(0x07);                                                           /* clear mode */
-    res = _ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);         /* write config */
-    if (res)                                                                   /* check result */
+    res = a_ina219_iic_write(handle, INA219_REG_CONF, (uint16_t )prev);        /* write config */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: write conf register failed.\n");          /* write conf register failed */
        
         return 4;                                                              /* return error */
     }
     res = handle->iic_deinit();                                                /* iic deinit */
-    if (res)                                                                   /* check result */
+    if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: iic deinit failed.\n");                   /* iic deinit failed */
        
@@ -1122,7 +1149,7 @@ uint8_t ina219_set_reg(ina219_handle_t *handle, uint8_t reg, uint16_t data)
         return 3;                                       /* return error */
     }
     
-    return _ina219_iic_write(handle, reg, data);        /* write data */
+    return a_ina219_iic_write(handle, reg, data);       /* write data */
 }
 
 /**
@@ -1148,7 +1175,7 @@ uint8_t ina219_get_reg(ina219_handle_t *handle, uint8_t reg, uint16_t *data)
         return 3;                                      /* return error */
     }
     
-    return _ina219_iic_read(handle, reg, data);        /* read data */
+    return a_ina219_iic_read(handle, reg, data);       /* read data */
 }
 
 /**
