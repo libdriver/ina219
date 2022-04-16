@@ -54,7 +54,7 @@ Add /src, /interface and /example to your project.
 uint8_t res;
 
 res = ina219_basic_init(INA219_ADDRESS_0, 0.1);
-if (res)
+if (res != 0)
 {
     return 1;
 }
@@ -68,9 +68,9 @@ for (i = 0; i < times; i++)
     float mW;
 
     res = ina219_basic_read(&mV, &mA, &mW);
-    if (res)
+    if (res != 0)
     {
-        ina219_basic_deinit();
+        (void)ina219_basic_deinit();
 
         return 1;
     }
@@ -86,7 +86,7 @@ for (i = 0; i < times; i++)
 
 ...
 
-ina219_basic_deinit();
+(void)ina219_basic_deinit();
 
 return 0;
 ```
@@ -97,7 +97,7 @@ return 0;
 uint8_t res;
 
 res = ina219_shot_init(INA219_ADDRESS_0, 0.1);
-if (res)
+if (res != 0)
 {
     return 1;
 }
@@ -111,9 +111,9 @@ for (i = 0; i < times; i++)
     float mW;
 
     res = ina219_shot_read(&mV, &mA, &mW);
-    if (res)
+    if (res != 0)
     {
-        ina219_shot_deinit();
+        (void)ina219_shot_deinit();
 
         return 1;
     }
@@ -129,7 +129,7 @@ for (i = 0; i < times; i++)
 
 ...
 
-ina219_shot_deinit();
+(void)ina219_shot_deinit();
 
 return 0;
 ```
