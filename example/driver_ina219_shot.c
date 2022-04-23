@@ -212,8 +212,6 @@ uint8_t ina219_shot_deinit(void)
     res = ina219_deinit(&gs_handle);
     if (res != 0)
     {
-        ina219_interface_debug_print("ina219: deinit failed.\n");
-       
         return 1;
     }
     
