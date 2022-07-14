@@ -1044,6 +1044,7 @@ uint8_t ina219_init(ina219_handle_t *handle)
     if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
+        (void)handle->iic_deinit();                                            /* iic deinit */
        
         return 4;                                                              /* return error */
     }
@@ -1052,7 +1053,8 @@ uint8_t ina219_init(ina219_handle_t *handle)
     if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: write conf register failed.\n");          /* write conf register failed */
-       
+        (void)handle->iic_deinit();                                            /* iic deinit */
+        
         return 4;                                                              /* return error */
     }
     handle->delay_ms(10);                                                      /* delay 10 ms */
@@ -1060,13 +1062,15 @@ uint8_t ina219_init(ina219_handle_t *handle)
     if (res != 0)                                                              /* check result */
     {
         handle->debug_print("ina219: read conf register failed.\n");           /* read conf register failed */
-       
+        (void)handle->iic_deinit();                                            /* iic deinit */
+        
         return 4;                                                              /* return error */
     }
     if ((prev & (1 << 15)) != 0)                                               /* check the result */
     {
         handle->debug_print("ina219: soft reset failed.\n");                   /* soft reset failed */
-       
+        (void)handle->iic_deinit();                                            /* iic deinit */
+        
         return 4;                                                              /* return error */
     }
     
