@@ -28,15 +28,15 @@ LibDriver INA219 is the full function driver of INA219 launched by LibDriver.It 
 
 /src includes LibDriver INA219 source files.
 
-/interface includes LibDriver INA219 IIC platform independent template。
+/interface includes LibDriver INA219 IIC platform independent template.
 
-/test includes LibDriver INA219 driver test code and this code can test the chip necessary function simply。
+/test includes LibDriver INA219 driver test code and this code can test the chip necessary function simply.
 
 /example includes LibDriver INA219 sample code.
 
 /doc includes LibDriver INA219 offline document.
 
-/datasheet includes INA219 datasheet。
+/datasheet includes INA219 datasheet.
 
 /project includes the common Linux and MCU development board sample code. All projects use the shell script to debug the driver and the detail instruction can be found in each project's README.md.
 
@@ -51,6 +51,8 @@ Add /src, /interface and /example to your project.
 #### example basic
 
 ```C
+#include "driver_ina219_basic.h"
+
 uint8_t res;
 
 res = ina219_basic_init(INA219_ADDRESS_0, 0.1);
@@ -94,6 +96,8 @@ return 0;
 #### example shot
 
 ```C
+#include "driver_ina219_shot.h"
+
 uint8_t res;
 
 res = ina219_shot_init(INA219_ADDRESS_0, 0.1);

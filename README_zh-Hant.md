@@ -51,6 +51,8 @@ LibDriver INA219是LibDriver推出的INA219的全功能驅動，該驅動提供�
 #### example basic
 
 ```C
+#include "driver_ina219_basic.h"
+
 uint8_t res;
 
 res = ina219_basic_init(INA219_ADDRESS_0, 0.1);
@@ -94,6 +96,8 @@ return 0;
 #### example shot
 
 ```C
+#include "driver_ina219_shot.h"
+
 uint8_t res;
 
 res = ina219_shot_init(INA219_ADDRESS_0, 0.1);
@@ -138,7 +142,7 @@ return 0;
 
 在線文檔: https://www.libdriver.com/docs/ina219/index.html
 
-離線文檔: /doc/html/index.htmll
+離線文檔: /doc/html/index.html
 
 ### 貢獻
 
