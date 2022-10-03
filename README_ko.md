@@ -51,6 +51,8 @@ LibDriver INA219는 LibDriver에서 출시한 INA219의 전체 기능 드라이�
 #### example basic
 
 ```C
+#include "driver_ina219_basic.h"
+
 uint8_t res;
 
 res = ina219_basic_init(INA219_ADDRESS_0, 0.1);
@@ -94,6 +96,8 @@ return 0;
 #### example shot
 
 ```C
+#include "driver_ina219_shot.h"
+
 uint8_t res;
 
 res = ina219_shot_init(INA219_ADDRESS_0, 0.1);

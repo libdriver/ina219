@@ -1,6 +1,6 @@
-### 1. chip
+### 1. Chip
 
-#### 1.1 chip info
+#### 1.1 Chip Info
 
 chip name : STM32F407ZGT6.
 
@@ -10,23 +10,23 @@ uart pin: TX/RX PA9/PA10.
 
 iic pin: SCL/SDA PB8/PB9.
 
-### 2. shell
+### 2. Shell
 
-#### 2.1 shell parameter
+#### 2.1 Shell Parameter
 
-baud rate: 115200
+baud rate: 115200.
 
-data bits : 8
+data bits : 8.
 
-stop bits: 1
+stop bits: 1.
 
-parity: none
+parity: none.
 
-flow control: none
+flow control: none.
 
-### 3. ina219
+### 3. INA219
 
-#### 3.1 command Instruction
+#### 3.1 Command Instruction
 
 ​          ina219 is a basic command which can test all ina219 driver function:
 
@@ -48,7 +48,7 @@ flow control: none
 
 ​          -c shot <times> -a <addr> -r <value>         run ina219 shot function.times is test times.addr can be "0"-"F".value is the resistance value.
 
-#### 3.2 command example
+#### 3.2 Command Example
 
 ```shell
 ina219 -i

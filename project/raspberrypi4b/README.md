@@ -1,22 +1,78 @@
-### 1. chip
+### 1. Chip
 
-#### 1.1 chip info
+#### 1.1 Chip Info
 
-chip name : Raspberry Pi 4B
+chip name : Raspberry Pi 4B.
 
-iic pin: SCL/SDA GPIO3/GPIO2
+iic pin: SCL/SDA GPIO3/GPIO2.
 
-### 2. install
+### 2. Install
 
-#### 2.1 install info
+#### 2.1 Dependencies
+
+Install the necessary dependencies.
+
+```shell
+sudo apt-get install libgpiod-dev pkg-config cmake -y
+```
+
+#### 2.2 Makefile
+
+Build the project.
 
 ```shell
 make
 ```
 
-### 3. ina219
+Install the project and this is optional.
 
-#### 3.1 command Instruction
+```shell
+sudo make install
+```
+
+Uninstall the project and this is optional.
+
+```shell
+sudo make uninstall
+```
+
+#### 2.3 CMake
+
+Build the project.
+
+```shell
+mkdir build && cd build 
+cmake .. 
+make
+```
+
+Install the project and this is optional.
+
+```shell
+sudo make install
+```
+
+Uninstall the project and this is optional.
+
+```shell
+sudo make uninstall
+```
+
+Test the project and this is optional.
+
+```shell
+make test
+```
+
+Find the compiled library in CMake. 
+
+```cmake
+find_package(ina219 REQUIRED)
+```
+
+### 3. INA219
+
+#### 3.1 Command Instruction
 
 ​          ina219 is a basic command which can test all ina219 driver function:
 
@@ -38,7 +94,7 @@ make
 
 ​          -c shot <times> -a <addr> -r <value>         run ina219 shot function.times is test times.addr can be "0"-"F".value is the resistance value.
 
-#### 3.2 command example
+#### 3.2 Command Example
 
 ```shell
 ./ina219 -i
