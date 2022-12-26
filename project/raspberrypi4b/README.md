@@ -1,10 +1,10 @@
-### 1. Chip
+### 1. Board
 
-#### 1.1 Chip Info
+#### 1.1 Board Info
 
-chip name : Raspberry Pi 4B.
+Board Name: Raspberry Pi 4B.
 
-iic pin: SCL/SDA GPIO3/GPIO2.
+IIC Pin: SCL/SDA GPIO3/GPIO2.
 
 ### 2. Install
 
@@ -74,25 +74,47 @@ find_package(ina219 REQUIRED)
 
 #### 3.1 Command Instruction
 
-​          ina219 is a basic command which can test all ina219 driver function:
+1. Show ina219 chip and driver information.
 
-​          -i        show ina219 chip and driver information.
+   ```shell
+   ina219 (-i | --information)
+   ```
 
-​          -h       show ina219 help.
+2. Show ina219 help.
 
-​          -p       show ina219 pin connections of the current board.
+   ```shell
+   ina219 (-h | --help)
+   ```
 
-​          -t (reg -a <addr> | read <times> -a <addr> -r <value>)
+3. Show ina219 pin connections of the current board.
 
-​          -t reg -a <addr>       run ina219 register test. addr can be "0"-"F".
+   ```shell
+   ina219 (-p | --port)
+   ```
 
-​          -t read <times> -a <addr> -r <value>       run ina219 read test. times is test times.addr can be "0"-"F".value is the resistance value.
+4. Run ina219 register test.
 
-​          -c (read <times> -a <addr> -r <value>  | shot <times> -a <addr> -r <value>)
+   ```shell
+   ina219 (-t reg | --test=reg) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>]
+   ```
 
-​          -c read <times> -a <addr> -r <value>         run ina219 read function.times is test times.addr can be "0"-"F".value is the resistance value.
+5. Run ina219 read test, num is the test times, r is the sample resistance.
 
-​          -c shot <times> -a <addr> -r <value>         run ina219 shot function.times is test times.addr can be "0"-"F".value is the resistance value.
+   ```shell
+   ina219 (-t read | --test=read) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>] [--resistance=<r>] [--times=<num>]
+   ```
+
+6. Run ina219 read function, num is the test times, r is the sample resistance.
+
+   ```shell
+   ina219 (-e read | --example=read) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>] [--resistance=<r>] [--times=<num>]
+   ```
+
+7. Run ina219 shot function, num is test times, r is the sample resistance.
+
+   ```shell
+   ina219 (-e shot | --example=shot) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>] [--resistance=<r>] [--times=<num>]
+   ```
 
 #### 3.2 Command Example
 
@@ -118,7 +140,7 @@ ina219: SDA connected to GPIO2(BCM).
 ```
 
 ```shell
-./ina219 -t reg -a 0
+./ina219 -t reg --addr=0
 
 ina219: chip is Texas Instruments INA219.
 ina219: manufacturer is Texas Instruments.
@@ -164,8 +186,8 @@ ina219: check addr pin ok.
 ina219: set addr pin 15.
 ina219: check addr pin ok.
 ina219: ina219_set_resistance/ina219_get_resistance test.
-ina219: set resistance 0.068000.
-ina219: check resistance 0.068000.
+ina219: set resistance 0.083000.
+ina219: check resistance 0.083000.
 ina219: ina219_set_bus_voltage_range/ina219_get_bus_voltage_range test.
 ina219: set bus voltage range 16V.
 ina219: check bus voltage range ok.
@@ -253,14 +275,14 @@ ina219: calculate calibration 8388.
 ina219: set pga 320 mV.
 ina219: calculate calibration 4194.
 ina219: ina219_set_calibration/ina219_get_calibration test.
-ina219: set calibration 8651.
+ina219: set calibration 9158.
 ina219: check calibration ok.
 ina219: ina219_soft_reset test.
 ina219: finish register test.
 ```
 
 ```shell
-./ina219 -t read 3 -a 0 -r 0.1
+./ina219 -t read --addr=0 --resistance=0.1 --times=3
 
 ina219: chip is Texas Instruments INA219.
 ina219: manufacturer is Texas Instruments.
@@ -341,7 +363,7 @@ ina219: finish read test.
 ```
 
 ```shell
-./ina219 -c read 3 -a 0 -r 0.1
+./ina219 -e read --addr=0 --resistance=0.1 --times=3
 
 ina219: 1/3.
 ina219: bus voltage is 4904.000mV.
@@ -358,7 +380,7 @@ ina219: power is 1474.609mW.
 ```
 
 ```shell
-./ina219 -c shot 3 -a 0 -r 0.1 
+./ina219 -e shot --addr=0 --resistance=0.1 --times=3
 
 ina219: 1/3.
 ina219: bus voltage is 4892.000mV.
@@ -377,19 +399,29 @@ ina219: power is 1392.578mW.
 ```shell
 ./ina219 -h
 
-ina219 -i
-	show ina219 chip and driver information.
-ina219 -h
-	show ina219 help.
-ina219 -p
-	show ina219 pin connections of the current board.
-ina219 -t reg -a <addr>
-	run ina219 register test.addr can be "0"-"F".
-ina219 -t read <times> -a <addr> -r <value>
-	run ina219 read test.times is test times.addr can be "0"-"F".value is the resistance value.
-ina219 -c read <times> -a <addr> -r <value>
-	run ina219 read function.times is test times.addr can be "0"-"F".value is the resistance value.
-ina219 -c shot <times> -a <addr> -r <value>
-	run ina219 shot function.times is test times.addr can be "0"-"F".value is the resistance value.
+Usage:
+  ina219 (-i | --information)
+  ina219 (-h | --help)
+  ina219 (-p | --port)
+  ina219 (-t reg | --test=reg) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>]
+  ina219 (-t read | --test=read) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>]
+         [--resistance=<r>] [--times=<num>]
+  ina219 (-e read | --example=read) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>]
+         [--resistance=<r>] [--times=<num>]
+  ina219 (-e shot | --example=shot) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>]
+         [--resistance=<r>] [--times=<num>]
+
+Options:
+      --addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>
+                                 Set the addr pin.([default: 0])
+  -e <read | shot>, --example=<read | shot>
+                                 Run the driver example.
+  -h, --help                     Show the help.
+  -i, --information              Show the chip information.
+  -p, --port                     Display the pin connections of the current board.
+      --resistance=<r>           Set the sample resistance.([default: 0.1])
+  -t <reg | read>, --test=<reg | read>
+                                 Run the driver test.
+      --times=<num>              Set the running times.([default: 3])
 ```
 
