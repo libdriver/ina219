@@ -2,52 +2,86 @@
 
 #### 1.1 Chip Info
 
-chip name : STM32F407ZGT6.
+Chip Name: STM32F407ZGT6.
 
-extern oscillator : 8MHz.
+Extern Oscillator: 8MHz.
 
-uart pin: TX/RX PA9/PA10.
+UART Pin: TX/RX PA9/PA10.
 
-iic pin: SCL/SDA PB8/PB9.
+IIC Pin: SCL/SDA PB8/PB9.
 
-### 2. Shell
+### 2. Development and Debugging
 
-#### 2.1 Shell Parameter
+#### 2.1 Integrated Development Environment
 
-baud rate: 115200.
+LidDriver provides both Keil and IAR integrated development environment projects.
 
-data bits : 8.
+MDK is the Keil ARM project and your Keil version must be 5 or higher.Keil ARM project needs STMicroelectronics STM32F4 Series Device Family Pack and you can download from https://www.keil.com/dd2/stmicroelectronics/stm32f407zgtx.
 
-stop bits: 1.
+EW is the IAR ARM project and your IAR version must be 9 or higher.
 
-parity: none.
+#### 2.2 Serial Port Parameter
 
-flow control: none.
+Baud Rate: 115200.
+
+Data Bits : 8.
+
+Stop Bits: 1.
+
+Parity: None.
+
+Flow Control: None.
+
+#### 2.3 Serial Port Assistant
+
+We use '\n' to wrap lines.If your serial port assistant displays exceptions (e.g. the displayed content does not divide lines), please modify the configuration of your serial port assistant or replace one that supports '\n' parsing.
 
 ### 3. INA219
 
 #### 3.1 Command Instruction
 
-​          ina219 is a basic command which can test all ina219 driver function:
+1. Show ina219 chip and driver information.
 
-​          -i        show ina219 chip and driver information.
+   ```shell
+   ina219 (-i | --information)
+   ```
 
-​          -h       show ina219 help.
+2. Show ina219 help.
 
-​          -p       show ina219 pin connections of the current board.
+   ```shell
+   ina219 (-h | --help)
+   ```
 
-​          -t (reg -a <addr> | read <times> -a <addr> -r <value>)
+3. Show ina219 pin connections of the current board.
 
-​          -t reg -a <addr>       run ina219 register test. addr can be "0"-"F".
+   ```shell
+   ina219 (-p | --port)
+   ```
 
-​          -t read <times> -a <addr> -r <value>       run ina219 read test. times is test times.addr can be "0"-"F".value is the resistance value.
+4. Run ina219 register test.
 
-​          -c (read <times> -a <addr> -r <value>  | shot <times> -a <addr> -r <value>)
+   ```shell
+   ina219 (-t reg | --test=reg) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>]
+   ```
 
-​          -c read <times> -a <addr> -r <value>         run ina219 read function.times is test times.addr can be "0"-"F".value is the resistance value.
+5. Run ina219 read test, num is the test times, r is the sample resistance.
 
-​          -c shot <times> -a <addr> -r <value>         run ina219 shot function.times is test times.addr can be "0"-"F".value is the resistance value.
+   ```shell
+   ina219 (-t read | --test=read) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>] [--resistance=<r>] [--times=<num>]
+   ```
 
+6. Run ina219 read function, num is the test times, r is the sample resistance.
+
+   ```shell
+   ina219 (-e read | --example=read) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>] [--resistance=<r>] [--times=<num>]
+   ```
+
+7. Run ina219 shot function, num is test times, r is the sample resistance.
+
+   ```shell
+   ina219 (-e shot | --example=shot) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>] [--resistance=<r>] [--times=<num>]
+   ```
+   
 #### 3.2 Command Example
 
 ```shell
@@ -72,7 +106,7 @@ ina219: SDA connected to GPIOB PIN9.
 ```
 
 ```shell
-ina219 -t reg -a 0
+ina219 -t reg --addr=0
 
 ina219: chip is Texas Instruments INA219.
 ina219: manufacturer is Texas Instruments.
@@ -214,7 +248,7 @@ ina219: finish register test.
 ```
 
 ```shell
-ina219 -t read 3 -a 0 -r 0.1
+ina219 -t read --addr=0 --resistance=0.1 --times=3
 
 ina219: chip is Texas Instruments INA219.
 ina219: manufacturer is Texas Instruments.
@@ -295,7 +329,7 @@ ina219: finish read test.
 ```
 
 ```shell
-ina219 -c read 3 -a 0 -r 0.1
+ina219 -e read --addr=0 --resistance=0.1 --times=3
 
 ina219: 1/3.
 ina219: bus voltage is 4904.000mV.
@@ -312,7 +346,7 @@ ina219: power is 1474.609mW.
 ```
 
 ```shell
-ina219 -c shot 3 -a 0 -r 0.1 
+ina219 -e shot --addr=0 --resistance=0.1 --times=3
 
 ina219: 1/3.
 ina219: bus voltage is 4892.000mV.
@@ -331,19 +365,29 @@ ina219: power is 1392.578mW.
 ```shell
 ina219 -h
 
-ina219 -i
-	show ina219 chip and driver information.
-ina219 -h
-	show ina219 help.
-ina219 -p
-	show ina219 pin connections of the current board.
-ina219 -t reg -a <addr>
-	run ina219 register test.addr can be "0"-"F".
-ina219 -t read <times> -a <addr> -r <value>
-	run ina219 read test.times is test times.addr can be "0"-"F".value is the resistance value.
-ina219 -c read <times> -a <addr> -r <value>
-	run ina219 read function.times is test times.addr can be "0"-"F".value is the resistance value.
-ina219 -c shot <times> -a <addr> -r <value>
-	run ina219 shot function.times is test times.addr can be "0"-"F".value is the resistance value.
+Usage:
+  ina219 (-i | --information)
+  ina219 (-h | --help)
+  ina219 (-p | --port)
+  ina219 (-t reg | --test=reg) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>]
+  ina219 (-t read | --test=read) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>]
+         [--resistance=<r>] [--times=<num>]
+  ina219 (-e read | --example=read) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>]
+         [--resistance=<r>] [--times=<num>]
+  ina219 (-e shot | --example=shot) [--addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>]
+         [--resistance=<r>] [--times=<num>]
+
+Options:
+      --addr=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F>
+                                 Set the addr pin.([default: 0])
+  -e <read | shot>, --example=<read | shot>
+                                 Run the driver example.
+  -h, --help                     Show the help.
+  -i, --information              Show the chip information.
+  -p, --port                     Display the pin connections of the current board.
+      --resistance=<r>           Set the sample resistance.([default: 0.1])
+  -t <reg | read>, --test=<reg | read>
+                                 Run the driver test.
+      --times=<num>              Set the running times.([default: 3])
 ```
 
