@@ -843,7 +843,6 @@ uint8_t ina219_get_calibration(ina219_handle_t *handle, uint16_t *data)
        
         return 1;                                                                    /* return error */
     }
-    *data =  (*data) >> 1;                                                           /* get data*/
     
     return 0;                                                                        /* success return 0 */
 }
@@ -968,7 +967,7 @@ uint8_t ina219_set_calibration(ina219_handle_t *handle, uint16_t data)
         return 3;                                                                   /* return error */
     }
     
-    res = a_ina219_iic_write(handle, INA219_REG_CALIBRATION, data << 1);            /* write calibration */
+    res = a_ina219_iic_write(handle, INA219_REG_CALIBRATION, data);                 /* write calibration */
     if (res != 0)                                                                   /* check result */
     {
         handle->debug_print("ina219: write calibration register failed.\n");        /* write calibration register failed */
