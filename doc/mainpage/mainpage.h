@@ -1,6 +1,6 @@
 /**
  * @mainpage  LibDriver INA219
- * @brief     libdriver ina219 is a full function driver of ina219 and it can run in both MCU and Linux platform.
+ * @brief     LibDriver INA219 is a full function driver of INA219 and it can run in both MCU and Linux platform.
  * @version   1.0.0
  * @author    Shifeng Li
  *
