@@ -8,7 +8,7 @@
 
 [![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/ina219/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
-INA219 是一款具備 I2C 或 SMBUS 兼容接口的分流器和功率監測計。該器件監測分流器電壓降和總線電源電壓，轉換次數和濾波選項可通過編程設定。可編程校準值與內部乘法器相結合，支持直接讀取電流值（單位：安培）。通過附加乘法寄存器可計算功率（單位：瓦）。 I2C 或 SMBUS 兼容接口 具有 16 個可編程地址。 INA219 可在 0V 至 26V 範圍內感測總線中的分壓。該器件由 3V 至 5.5V 單電源供電，電源的最大流耗為 1mA。該設備可用於服務器、通信設備、筆記本、電源管理、充電器、電焊、電源和測試設備等。
+INA219是一款具備I2C或SMBUS相容介面的分流器和功率監測計。 該器件監測分流器電壓降和匯流排電源電壓，轉換次數和濾波選項可通過程式設計設定。 可程式設計校準值與內部乘法器相結合，支持直接讀取電流值（組織：安培）。 通過附加乘法寄存器可計算功率（組織：瓦）。 I2C或SMBUS相容介面具有16個可程式設計地址。 INA219可在0V至26V範圍內感測匯流排中的分壓。 該器件由3V至5.5V單電源供電，晶片的最大功耗為1mA。 該設備可用於服務器、通信設備、筆記本、電源管理、充電器、電焊、電源和測試設備等。
 
 LibDriver INA219是LibDriver推出的INA219的全功能驅動，該驅動提供連續模式讀取、單次模式讀取，電流採集、電壓採集和功率採集等功能並且它符合MISRA標準。
 
