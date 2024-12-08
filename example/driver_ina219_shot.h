@@ -58,8 +58,8 @@ extern "C"{
 
 /**
  * @brief     shot example init
- * @param[in] addr_pin is the iic address pin
- * @param[in] r is the reference resistor value
+ * @param[in] addr_pin iic address pin
+ * @param[in] r reference resistor value
  * @return    status code
  *            - 0 success
  *            - 1 init failed
@@ -78,9 +78,9 @@ uint8_t ina219_shot_deinit(void);
 
 /**
  * @brief      shot example read
- * @param[out] *mV points to a mV buffer
- * @param[out] *mA points to a mA buffer
- * @param[out] *mW points to a mW buffer
+ * @param[out] *mV pointer to a mV buffer
+ * @param[out] *mA pointer to a mA buffer
+ * @param[out] *mW pointer to a mW buffer
  * @return     status code
  *             - 0 success
  *             - 1 read failed

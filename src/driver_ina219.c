@@ -61,9 +61,9 @@
 
 /**
  * @brief      iic interface read bytes
- * @param[in]  *handle points to an ina219 handle structure
- * @param[in]  reg is the iic register address
- * @param[out] *data points to a data buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[in]  reg iic register address
+ * @param[out] *data pointer to a data buffer
  * @return     status code
  *             - 0 success
  *             - 1 read failed
@@ -88,9 +88,9 @@ static uint8_t a_ina219_iic_read(ina219_handle_t *handle, uint8_t reg, uint16_t 
 
 /**
  * @brief     iic interface write bytes
- * @param[in] *handle points to an ina219 handle structure
- * @param[in] reg is the iic register address
- * @param[in] data is the written data
+ * @param[in] *handle pointer to an ina219 handle structure
+ * @param[in] reg iic register address
+ * @param[in] data written data
  * @return    status code
  *            - 0 success
  *            - 1 write failed
@@ -114,8 +114,8 @@ static uint8_t a_ina219_iic_write(ina219_handle_t *handle, uint8_t reg, uint16_t
 
 /**
  * @brief     set the resistance
- * @param[in] *handle points to an ina219 handle structure
- * @param[in] resistance is the current sampling resistance value
+ * @param[in] *handle pointer to an ina219 handle structure
+ * @param[in] resistance current sampling resistance value
  * @return    status code
  *            - 0 success
  *            - 2 handle is NULL
@@ -135,8 +135,8 @@ uint8_t ina219_set_resistance(ina219_handle_t *handle, double resistance)
 
 /**
  * @brief      get the resistance
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *resistance points to a current sampling resistance value buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *resistance pointer to a current sampling resistance value buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -156,8 +156,8 @@ uint8_t ina219_get_resistance(ina219_handle_t *handle, double *resistance)
 
 /**
  * @brief     set the iic address pin
- * @param[in] *handle points to an ina219 handle structure
- * @param[in] addr_pin is the address pin
+ * @param[in] *handle pointer to an ina219 handle structure
+ * @param[in] addr_pin address pin
  * @return    status code
  *            - 0 success
  *            - 2 handle is NULL
@@ -177,8 +177,8 @@ uint8_t ina219_set_addr_pin(ina219_handle_t *handle, ina219_address_t addr_pin)
 
 /**
  * @brief      get the iic address pin
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *addr_pin points to an address pin buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *addr_pin pointer to an address pin buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -198,7 +198,7 @@ uint8_t ina219_get_addr_pin(ina219_handle_t *handle, ina219_address_t *addr_pin)
 
 /**
  * @brief     soft reset the chip
- * @param[in] *handle points to an ina219 handle structure
+ * @param[in] *handle pointer to an ina219 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 soft reset failed
@@ -235,8 +235,8 @@ uint8_t ina219_soft_reset(ina219_handle_t *handle)
 
 /**
  * @brief     set the bus voltage range
- * @param[in] *handle points to an ina219 handle structure
- * @param[in] range is the bus voltage range
+ * @param[in] *handle pointer to an ina219 handle structure
+ * @param[in] range bus voltage range
  * @return    status code
  *            - 0 success
  *            - 1 set bus voltage range failed
@@ -273,8 +273,8 @@ uint8_t ina219_set_bus_voltage_range(ina219_handle_t *handle, ina219_bus_voltage
 
 /**
  * @brief      get the bus voltage range
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *range points to a bus voltage range buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *range pointer to a bus voltage range buffer
  * @return     status code
  *             - 0 success
  *             - 1 get bus voltage range failed
@@ -310,8 +310,8 @@ uint8_t ina219_get_bus_voltage_range(ina219_handle_t *handle, ina219_bus_voltage
 
 /**
  * @brief     set the pga
- * @param[in] *handle points to an ina219 handle structure
- * @param[in] pga is the adc pga
+ * @param[in] *handle pointer to an ina219 handle structure
+ * @param[in] pga adc pga
  * @return    status code
  *            - 0 success
  *            - 1 set pga failed
@@ -348,8 +348,8 @@ uint8_t ina219_set_pga(ina219_handle_t *handle, ina219_pga_t pga)
 
 /**
  * @brief      get the pga
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *pga points to an adc pga buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *pga pointer to an adc pga buffer
  * @return     status code
  *             - 0 success
  *             - 1 get pga failed
@@ -385,8 +385,8 @@ uint8_t ina219_get_pga(ina219_handle_t *handle, ina219_pga_t *pga)
 
 /**
  * @brief     set the bus voltage adc mode
- * @param[in] *handle points to an ina219 handle structure
- * @param[in] mode is the adc mode
+ * @param[in] *handle pointer to an ina219 handle structure
+ * @param[in] mode adc mode
  * @return    status code
  *            - 0 success
  *            - 1 set bus voltage adc mode failed
@@ -423,8 +423,8 @@ uint8_t ina219_set_bus_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mode
 
 /**
  * @brief      get the bus voltage adc mode
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *mode points to an adc mode buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *mode pointer to an adc mode buffer
  * @return     status code
  *             - 0 success
  *             - 1 get bus voltage adc mode failed
@@ -460,8 +460,8 @@ uint8_t ina219_get_bus_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mode
 
 /**
  * @brief     set the shunt voltage adc mode
- * @param[in] *handle points to an ina219 handle structure
- * @param[in] mode is the adc mode
+ * @param[in] *handle pointer to an ina219 handle structure
+ * @param[in] mode adc mode
  * @return    status code
  *            - 0 success
  *            - 1 set shunt voltage adc mode failed
@@ -498,8 +498,8 @@ uint8_t ina219_set_shunt_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mo
 
 /**
  * @brief      get the shunt voltage adc mode
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *mode points to an adc mode buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *mode pointer to an adc mode buffer
  * @return     status code
  *             - 0 success
  *             - 1 get shunt voltage adc mode failed
@@ -535,8 +535,8 @@ uint8_t ina219_get_shunt_voltage_adc_mode(ina219_handle_t *handle, ina219_adc_mo
 
 /**
  * @brief     set the mode
- * @param[in] *handle points to an ina219 handle structure
- * @param[in] mode is the chip mode
+ * @param[in] *handle pointer to an ina219 handle structure
+ * @param[in] mode chip mode
  * @return    status code
  *            - 0 success
  *            - 1 set mode failed
@@ -602,8 +602,8 @@ uint8_t ina219_set_mode(ina219_handle_t *handle, ina219_mode_t mode)
 
 /**
  * @brief      get the mode
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *mode points to a chip mode buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *mode pointer to a chip mode buffer
  * @return     status code
  *             - 0 success
  *             - 1 get mode failed
@@ -639,9 +639,9 @@ uint8_t ina219_get_mode(ina219_handle_t *handle, ina219_mode_t *mode)
 
 /**
  * @brief      read the shunt voltage
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *raw points to raw data buffer
- * @param[out] *mV points to converted data buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *raw pointer to raw data buffer
+ * @param[out] *mV pointer to converted data buffer
  * @return     status code
  *             - 0 success
  *             - 1 read shunt voltage failed
@@ -682,9 +682,9 @@ uint8_t ina219_read_shunt_voltage(ina219_handle_t *handle, int16_t *raw, float *
 
 /**
  * @brief      read the bus voltage
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *raw points to raw data buffer
- * @param[out] *mV points to converted data buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *raw pointer to raw data buffer
+ * @param[out] *mV pointer to converted data buffer
  * @return     status code
  *             - 0 success
  *             - 1 read bus voltage failed
@@ -734,9 +734,9 @@ uint8_t ina219_read_bus_voltage(ina219_handle_t *handle, uint16_t *raw, float *m
 
 /**
  * @brief      read the current
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *raw points to raw data buffer
- * @param[out] *mA points to converted data buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *raw pointer to raw data buffer
+ * @param[out] *mA pointer to converted data buffer
  * @return     status code
  *             - 0 success
  *             - 1 read current failed
@@ -777,9 +777,9 @@ uint8_t ina219_read_current(ina219_handle_t *handle, int16_t *raw, float *mA)
 
 /**
  * @brief      read the power
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *raw points to raw data buffer
- * @param[out] *mW points to converted data buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *raw pointer to raw data buffer
+ * @param[out] *mW pointer to converted data buffer
  * @return     status code
  *             - 0 success
  *             - 1 read power failed
@@ -814,8 +814,8 @@ uint8_t ina219_read_power(ina219_handle_t *handle, uint16_t *raw, float *mW)
 
 /**
  * @brief      get the calibration
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *data points to a calibration data buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *data pointer to a calibration data buffer
  * @return     status code
  *             - 0 success
  *             - 1 get calibration failed
@@ -849,8 +849,8 @@ uint8_t ina219_get_calibration(ina219_handle_t *handle, uint16_t *data)
 
 /**
  * @brief      calculate the calibration
- * @param[in]  *handle points to an ina219 handle structure
- * @param[out] *calibration points to a calibration data buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[out] *calibration pointer to a calibration data buffer
  * @return     status code
  *             - 0 success
  *             - 1 calibration calibration failed
@@ -945,8 +945,8 @@ uint8_t ina219_calculate_calibration(ina219_handle_t *handle, uint16_t *calibrat
 
 /**
  * @brief     set the calibration
- * @param[in] *handle points to an ina219 handle structure
- * @param[in] data is the calibration data
+ * @param[in] *handle pointer to an ina219 handle structure
+ * @param[in] data calibration data
  * @return    status code
  *            - 0 success
  *            - 1 set calibration failed
@@ -980,7 +980,7 @@ uint8_t ina219_set_calibration(ina219_handle_t *handle, uint16_t data)
 
 /**
  * @brief     initialize the chip
- * @param[in] *handle points to an ina219 handle structure
+ * @param[in] *handle pointer to an ina219 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 iic initialization failed
@@ -1080,7 +1080,7 @@ uint8_t ina219_init(ina219_handle_t *handle)
 
 /**
  * @brief     close the chip
- * @param[in] *handle points to an ina219 handle structure
+ * @param[in] *handle pointer to an ina219 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 iic deinit failed
@@ -1131,9 +1131,9 @@ uint8_t ina219_deinit(ina219_handle_t *handle)
 
 /**
  * @brief     set the chip register
- * @param[in] *handle points to an ina219 handle structure
- * @param[in] reg is the register address
- * @param[in] data is the write data
+ * @param[in] *handle pointer to an ina219 handle structure
+ * @param[in] reg register address
+ * @param[in] data written data
  * @return    status code
  *            - 0 success
  *            - 1 write failed
@@ -1157,9 +1157,9 @@ uint8_t ina219_set_reg(ina219_handle_t *handle, uint8_t reg, uint16_t data)
 
 /**
  * @brief      get the chip register
- * @param[in]  *handle points to an ina219 handle structure
- * @param[in]  reg is the register address
- * @param[out] *data points to a data buffer
+ * @param[in]  *handle pointer to an ina219 handle structure
+ * @param[in]  reg register address
+ * @param[out] *data pointer to a data buffer
  * @return     status code
  *             - 0 success
  *             - 1 read failed
@@ -1183,7 +1183,7 @@ uint8_t ina219_get_reg(ina219_handle_t *handle, uint8_t reg, uint16_t *data)
 
 /**
  * @brief      get chip's information
- * @param[out] *info points to an ina219 info structure
+ * @param[out] *info pointer to an ina219 info structure
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
