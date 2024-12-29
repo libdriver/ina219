@@ -40,9 +40,9 @@ static ina219_handle_t gs_handle;        /**< ina219 handle */
 
 /**
  * @brief     read test
- * @param[in] addr_pin is the iic device address
- * @param[in] r is the extern resistance
- * @param[in] times is the test times
+ * @param[in] addr_pin iic device address
+ * @param[in] r extern resistance
+ * @param[in] times test times
  * @return    status code
  *            - 0 success
  *            - 1 test failed
