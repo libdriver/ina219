@@ -10,7 +10,7 @@
 
 The INA219 is a current shunt and power monitor with an I2C- or SMBUS-compatible interface. The device monitors both shunt voltage drop and bus supply voltage, with programmable conversion times and filtering. A programmable calibration value, combined with an internal multiplier, enables direct readouts of current in amperes. An additional multiplying register calculates power in watts. The I2C- or SMBUS-compatible interface features 16 programmable addresses.The INA219 senses across shunts on buses that can vary from 0 to 26 V. The device uses a single 3- to 5.5-V supply, drawing a maximum of 1 mA of supply current.This chip can be used in servers,telecom equipment,notebook computers,power management,battery chargers,welding equipment,power supplies,test equipment and so on.
 
-LibDriver INA219 is the full function driver of INA219 launched by LibDriver.It provides continuous mode reading, single mode reading, current acquisition, voltage acquisition and power acquisition.LibDriver is MISRA compliant.
+LibDriver INA219 is a full-featured driver of INA219 launched by LibDriver.It provides continuous mode reading, single mode reading, current acquisition, voltage acquisition and power acquisition.LibDriver is MISRA compliant.
 
 ### Table of Contents
 
