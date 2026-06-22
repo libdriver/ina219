@@ -348,7 +348,6 @@ uint8_t ina219_read_shunt_voltage(ina219_handle_t *handle, int16_t *raw, float *
  *             - 2 handle is NULL
  *             - 3 handle is not initialized
  *             - 4 math overflow
- *             - 5 conversion not ready
  * @note       none
  */
 uint8_t ina219_read_bus_voltage(ina219_handle_t *handle, uint16_t *raw, float *mV);

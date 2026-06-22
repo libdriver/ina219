@@ -584,12 +584,12 @@ uint8_t ina219_set_mode(ina219_handle_t *handle, ina219_mode_t mode)
         m = (mode1 > mode2) ? mode1 : mode2;                                   /* get max mode */
         if (m <= 8)                                                            /* check mode */
         {
-            handle->delay_ms(1);                                               /* delay 1 ms */
+            handle->delay_ms(2);                                               /* delay 2 ms */
         }
         else
         {
             t = (uint8_t)(0.532 * pow(2, m - 8)) + 1;                          /* get time */
-            handle->delay_ms(t);                                               /* delay time */
+            handle->delay_ms(t * 2);                                           /* delay time */
         }
         
         return 0;                                                              /* success return 0 */
@@ -691,7 +691,6 @@ uint8_t ina219_read_shunt_voltage(ina219_handle_t *handle, int16_t *raw, float *
  *             - 2 handle is NULL
  *             - 3 handle is not initialized
  *             - 4 math overflow
- *             - 5 conversion not ready
  * @note       none
  */
 uint8_t ina219_read_bus_voltage(ina219_handle_t *handle, uint16_t *raw, float *mV)
@@ -714,17 +713,11 @@ uint8_t ina219_read_bus_voltage(ina219_handle_t *handle, uint16_t *raw, float *m
        
         return 1;                                                                   /* return error */
     }
-    if (((*raw) & (1 << 0)) != 0)
+    if (((*raw) & (1 << 0)) != 0)                                                   /* check math overflow */
     {
         handle->debug_print("ina219: math overflow.\n");                            /* math overflow */
        
         return 4;                                                                   /* return error */
-    }
-    if (((*raw) & (1 << 1)) == 0)
-    {
-        handle->debug_print("ina219: conversion not ready.\n");                     /* math overflow */
-       
-        return 5;                                                                   /* return error */
     }
     *raw = (*raw) >> 3;                                                             /* right shift 3 */
     *mV = (float)(*raw) * 4.0f;                                                     /* set the converted data */
